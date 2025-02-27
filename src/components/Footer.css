@@ -1,0 +1,24 @@
+footer {
+    background: var(--dark);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .social-links a {
+    color: white;
+    font-size: 1.5rem;
+    transition: var(--transition);
+  }
+
+  .social-links a:hover {
+    color: var(--secondary);
+    transform: translateY(-5px);
+  }
