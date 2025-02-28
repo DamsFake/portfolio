@@ -69,3 +69,10 @@ header {
       font-size: 2.5rem;
     }
   }
+.buttonContainer{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  gap: 20px;
+  justify-content: center;
+}
