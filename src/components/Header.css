@@ -18,6 +18,26 @@ header {
     animation: fadeIn 1s ease-in-out;
   }
 
+  .hero-text h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  .hero-text h3 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: fadeIn 1s ease-in-out;
+  }
+
   .hero-text p {
     font-size: 1.2rem;
     max-width: 600px;

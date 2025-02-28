@@ -2,42 +2,44 @@ import React from 'react';
 import './Projects.css';
 import ScrollAnimation from './ScrollAnimation';
 import ParallaxElement from './ParallaxElement';
-import eCommerce from './Akihabara-Neon-Nightscape.jpg'
-import visDatos from './Akihabara-Neon-Nightscape.jpg'
-import appGesTareas from './Akihabara-Neon-Nightscape.jpg'
+import bd from '../img/bd.jpeg'
+import crud from '../img/crud.jpeg'
+import sisat from '../img/sisat.jpeg'
+import sisat2 from '../img/sisat2.jpeg'
+import svrcent from '../img/svrcent.jpeg'
 
 
 const Projects = () => {
   const projectsData = [
     {
-      img: eCommerce,
-      title: "E-commerce Interactivo",
-      description: "Tienda online con carrito de compras, filtros de productos y pasarela de pago.",
-      tech: ["React", "Redux", "Styled Components"]
+      img: crud,
+      title: "CRUD in Python with MySQL",
+      description: "CRUD en Python utilizando MySQL como sistema gestor de base de datos.",
+      tech: ["MySQL", "Python"]
     },
     {
-      img: eCommerce,
-      title: "E-commerce Interactivo",
-      description: "Tienda online con carrito de compras, filtros de productos y pasarela de pago.",
-      tech: ["React", "Redux", "Styled Components"]
+      img: bd,
+      title: "Creation of database for cable shop",
+      description: "Creación de una base de datos para una tienda de cables, utilizando una vez más MySQL.",
+      tech: ["MySQL", "SQL Workbench"]
     },
     {
-      img: eCommerce,
-      title: "E-commerce Interactivo",
-      description: "Tienda online con carrito de compras, filtros de productos y pasarela de pago.",
-      tech: ["React", "Redux", "Styled Components"]
+      img: sisat,
+      title: "Maintenance of the SICLE website",
+      description: "Mantenimiento de página web SICLE (Sistema Integral de la Coordinación de Lenguas Extranjeras)",
+      tech: ["PHP", "HTML", "JavaScript"]
     },
     {
-      img: visDatos,
-      title: "Visualizador de Datos",
-      description: "Aplicación interactiva para visualizar datos con gráficos personalizables.",
-      tech: ["D3.js", "JavaScript", "CSS Grid"]
+      img: sisat2,
+      title: "Redesign of the SICLE website",
+      description: "Rediseño de página web SICLE (Sistema Integral de la Coordinación de Lenguas Extranjeras)",
+      tech: ["CSS", "BootStrap 5", "CSS Grid"]
     },
     {
-      img: appGesTareas,
-      title: "App de Gestión de Tareas",
-      description: "Aplicación para gestionar proyectos y tareas con funcionalidades avanzadas.",
-      tech: ["Vue.js", "Vuex", "Firebase"]
+      img: svrcent,
+      title: "Made a functional server with CentOs",
+      description: "Creación de un servidor funcional utilizando el S.O. de CentOs con servicios como DHCP, DNS, FTP, HTTP, SMTP y demás servicios.",
+      tech: ["CentOS", "HTTP", "FTP", "Samba", "SMTP", "DNS"]
     }
   ];
 

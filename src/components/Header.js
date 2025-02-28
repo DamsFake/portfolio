@@ -7,7 +7,9 @@ const Header = () => {
     <header id="inicio">
       <FloatingShapes />
       <div className="hero-text">
-        <h1>Desarrollador Front-end Creativo</h1>
+        <h1>Desarrollador Front-end</h1>
+        <h2>Damián Benítez Orozco</h2>
+        <h3>Ing. en Sistemas Computacionales</h3>
         <p>Especializado en crear experiencias web interactivas, responsivas y accesibles utilizando las tecnologías más modernas.</p>
         <a href="#proyectos" className="btn">Ver Proyectos</a>
       </div>
