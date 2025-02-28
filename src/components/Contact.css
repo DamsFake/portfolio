@@ -92,8 +92,7 @@
 }
 
 .logoContact{
-  text-align: center;
-  justify-items: center;
+  justify-content: center;
   padding: 2rem;
 
 }
