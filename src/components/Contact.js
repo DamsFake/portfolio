@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './Contact.css';
 import ScrollAnimation from './ScrollAnimation';
 import { IoMdMail, IoLogoGithub, IoLogoLinkedin, IoIosDownload  } from "react-icons/io";
-import cv from "../docs/cv.pdf";
+const cv = process.env.PUBLIC_URL + '/cv.pdf';
 
 const Contact = () => {
   const [showModal, setShowModal] = useState(false);
