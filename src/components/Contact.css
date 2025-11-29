@@ -1,3 +1,59 @@
+.contact-section,
+.contact-form,
+.logoContact,
+.descargarCV,
+.cv-modal,
+.cv-actions,
+.cv-close {
+  transition: background-color 300ms ease, color 250ms ease, border-color 250ms ease, box-shadow 250ms ease, transform 160ms ease, opacity 250ms ease;
+}
+
+.submit-btn,
+.cv-actions .button {
+  transition: background 180ms ease, color 180ms ease, transform 140ms ease, box-shadow 180ms ease;
+}
+
+.cv-modal-backdrop {
+  animation: modalFadeIn 220ms cubic-bezier(.2,.9,.3,1);
+  /* asegúrate de que el backdrop también tenga transición de color/opacity */
+  transition: background-color 220ms ease, opacity 220ms ease;
+}
+
+/* Ejemplo: definir estados claros/oscuro más suaves (ajusta colores si usas variables) */
+.contact-section { background-color: rgba(255,255,255,0.02); color: var(--text); }
+.dark-mode .contact-section { background-color: rgba(10,12,18,0.04); color: var(--text); }
+
+/* Si quieres que el form cambie más notoriamente */
+.contact-form { border-color: rgba(255,255,255,0.03); background-color: rgba(255,255,255,0.015); }
+.dark-mode .contact-form { border-color: rgba(255,255,255,0.02); background-color: rgba(0,0,0,0.32); }
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.995); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes modalFadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+@keyframes modalScaleOut {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to   { opacity: 0; transform: translateY(8px) scale(0.98); }
+}
+
+/* Cuando se añade la clase closing se reproducen las animaciones de salida */
+.cv-modal-backdrop.closing {
+  animation: modalFadeOut 220ms ease forwards;
+  background: rgba(4,6,12,0); /* se desvanece el backdrop */
+}
+.cv-modal-backdrop.closing .cv-modal {
+  animation: modalScaleOut 220ms cubic-bezier(.2,.9,.3,1) forwards;
+}
+
+/* Mantener la entrada en opening (opcional) */
+.cv-modal-backdrop.opening { animation: modalFadeIn 220ms cubic-bezier(.2,.9,.3,1); }
+.cv-modal-backdrop.opening .cv-modal { animation: modalFadeIn 220ms cubic-bezier(.2,.9,.3,1); }
+
 .contact-section {
     padding: 5rem 10%;
   }
@@ -95,4 +151,114 @@
   justify-content: center;
   padding: 2rem;
 
+}
+
+/* Modal styles */
+.cv-modal-backdrop{
+  position: fixed;
+  inset: 0;
+  background: rgba(4,6,12,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+  padding: 2rem;
+}
+
+.cv-modal{
+  width: 100%;
+  max-width: 980px;
+  height: 80vh;
+  background: var(--surface, rgba(11,18,32,0.95));
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(2,6,23,0.7);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+.cv-close{
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: var(--muted, #9aa7ba);
+  font-size: 1.25rem;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.cv-close:hover{ color: var(--text); transform: translateY(-2px); }
+
+.cv-content{
+  flex: 1 1 auto;
+  background: #0a0f1a;
+  display: flex;
+}
+
+/* iframe debe ocupar todo */
+.cv-content iframe{
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* acciones (descargar/cerrar) */
+.cv-actions{
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  align-items: center;
+  justify-content: flex-end;
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+  border-top: 1px solid rgba(255,255,255,0.02);
+  color:#9aa7ba;
+}
+
+.cv-actions .button{
+  background: transparent;
+  color: var(--muted, #9aa7ba);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 0.5rem 0.85rem;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .12s ease, color .12s ease, transform .12s ease;
+}
+
+/* botón principal (Descargar) — alto contraste */
+.cv-actions .button.primary{
+  background: var(--primary, #6c5ce7);
+  color: #fff;
+  border-color: rgba(0,0,0,0.15);
+  box-shadow: 0 6px 18px rgba(108,92,231,0.18);
+}
+
+/* hover / focus states */
+.cv-actions .button:hover,
+.cv-actions .button:focus{
+  transform: translateY(-3px);
+  outline: none;
+}
+
+.cv-actions .button.primary:hover,
+.cv-actions .button.primary:focus{
+  background: color-mix(in srgb, var(--primary, #6c5ce7) 85%, black 15%);
+  box-shadow: 0 10px 26px rgba(108,92,231,0.22);
+}
+
+/* "Cerrar" se mantendrá con borde claro pero texto más visible */
+.cv-actions .button:not(.primary){
+  color: var(--text, #e6eef8);
+  border-color: rgba(255,255,255,0.08);
+  background: rgba(17,102,255,0.29);
+}
+
+/* mobile adjustments */
+@media (max-width:720px){
+  .cv-modal{ height: 86vh; max-width: 94%; }
+  .cv-actions{ justify-content: center; flex-wrap:wrap; }
 }

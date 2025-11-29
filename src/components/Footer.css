@@ -1,24 +1,50 @@
 footer {
-    background: var(--dark);
-    color: white;
-    padding: 2rem;
-    text-align: center;
-  }
+  padding: 1.5rem 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: rgba(0, 0, 0, 0.8); /* igual que navbar */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  border-top: 1px solid rgba(0,0,0,0.06);
+  color: var(--light, #0b1220);
+  text-align: center;
+  padding-bottom: 2rem;
+  padding-top: 0%;
+}
 
-  .social-links {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    margin: 1.5rem 0;
-  }
+/* enlaces sociales coherentes con navbar */
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1rem 0;
+}
 
-  .social-links a {
-    color: white;
-    font-size: 1.5rem;
-    transition: var(--transition);
-  }
+.social-links a {
+  color: var(--dark, #0b1220);
+  font-size: 1.25rem;
+  transition: var(--transition, all .15s ease);
+}
 
-  .social-links a:hover {
-    color: var(--secondary);
-    transform: translateY(-5px);
-  }
+.social-links a:hover {
+  color: var(--primary);
+  transform: translateY(-3px);
+}
+
+/* Modo oscuro: mismo comportamiento que nav */
+.dark-mode footer {
+  background-color: rgba(26,26,26,0.8);
+  color: var(--text, #e6eef8);
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+.dark-mode .social-links a {
+  color: var(--text, #e6eef8);
+}
+
+.dark-mode .social-links a:hover {
+  color: var(--primary);
+}

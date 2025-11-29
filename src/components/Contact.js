@@ -1,75 +1,140 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Contact.css';
 import ScrollAnimation from './ScrollAnimation';
 import { IoMdMail, IoLogoGithub, IoLogoLinkedin, IoIosDownload  } from "react-icons/io";
-
+import cv from "../docs/cv.pdf";
 
 const Contact = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+  const modalRef = useRef(null);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Lógica para manejar el envío del formulario
     alert('Formulario enviado (demo)');
   };
+
+  const openModal = (e) => {
+    e && e.preventDefault();
+    setIsClosing(false);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    // activa animación de cierre; el efecto desmontará el modal al terminar
+    setIsClosing(true);
+  };
+
+  useEffect(() => {
+    const onKey = (ev) => {
+      if (ev.key === 'Escape' && showModal && !isClosing) closeModal();
+    };
+    if (showModal) {
+      document.addEventListener('keydown', onKey);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [showModal, isClosing]);
+
+  // esperar animationend para desmontar el modal (fallback con timeout)
+  useEffect(() => {
+    if (!isClosing) return;
+    const el = modalRef.current;
+    if (!el) {
+      setShowModal(false);
+      setIsClosing(false);
+      return;
+    }
+    const handleEnd = () => {
+      setShowModal(false);
+      setIsClosing(false);
+    };
+    el.addEventListener('animationend', handleEnd);
+    const fallback = setTimeout(handleEnd, 420);
+    return () => {
+      el.removeEventListener('animationend', handleEnd);
+      clearTimeout(fallback);
+    };
+  }, [isClosing]);
 
   return (
     <section className="contact-section" id="contacto">
       <h2>Contacto</h2>
       <ScrollAnimation>
-
         <div className="contact-form">
-          {/* <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="name">Nombre</label>
-              <input type="text" id="name" placeholder="Tu nombre" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input type="email" id="email" placeholder="tu@email.com" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="message">Mensaje</label>
-              <textarea id="message" placeholder="Tu mensaje aquí..."></textarea>
-            </div>
-            <button type="submit" className="submit-btn">Enviar Mensaje</button>
-          </form> */}
 
-        <div className="logoContact">
+          <div className="logoContact">
+            <a
+              className="submit-btn"
+              href="mailto:damianbtzor@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Enviar correo"
+            >
+              <IoMdMail size={30}/>
+            </a>
 
+            <a
+              className="submit-btn"
+              href="https://github.com/DamsFake"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+            >
+              <IoLogoGithub size={30}/>
+            </a>
 
-        <a href="mailto:damianbtzor@gmail.com" target='_blank'>
-        <button type="submit" className="submit-btn">
-        <IoMdMail size={30}/>
-        </button>
-        </a>
+            <a
+              className="submit-btn"
+              href="https://www.linkedin.com/in/damian-benitez-orozco-81b8a3270/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+            >
+              <IoLogoLinkedin size={30}/>
+            </a>
+          </div>
 
-
-        <a href="https://github.com/DamsFake" target='_blank'>
-        <button type="submit" className="submit-btn">
-        <IoLogoGithub size={30}/>
-        </button>
-        </a>
-
-
-        <a href="https://www.linkedin.com/in/damian-benitez-orozco-81b8a3270/" target='_blank'>
-        <button type="submit" className="submit-btn">
-        <IoLogoLinkedin size={30}/>
-        </button>
-        </a>
-
-
-        </div>
-
-        <div className="descargarCV">
-        <a href="https://drive.google.com/file/d/1CBZkBdbSXOYwY7-DcD_1z_O1n_3FzB8Z/view?usp=sharing" target='_blank'>
-        <button type="submit" className="submit-btn">
-        <IoIosDownload  size={30}/> <br></br>Descargar CV
-        </button>
-        </a>
-        </div>
-
+          <div className="descargarCV">
+            <button
+              className="submit-btn"
+              onClick={openModal}
+              aria-haspopup="dialog"
+              aria-label="Previsualizar CV"
+            >
+              <IoIosDownload size={30}/> <br/>Ver CV
+            </button>
+          </div>
 
         </div>
       </ScrollAnimation>
+
+      {showModal && (
+        // añadida ref y clase 'closing' cuando isClosing=true
+        <div
+          ref={modalRef}
+          className={`cv-modal-backdrop ${isClosing ? 'closing' : 'opening'}`}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Previsualización del CV"
+        >
+          <div className="cv-modal">
+            <button className="cv-close" onClick={closeModal} aria-label="Cerrar previsualización">×</button>
+            <div className="cv-content">
+              <iframe src={cv} title="CV Damian Benitez Orozco" frameBorder="0" />
+            </div>
+            <div className="cv-actions">
+              <a className="button" href={cv} download="CV-Damian-Benitez-Orozco.pdf" rel="noopener noreferrer">Descargar</a>
+              <button className="button" onClick={closeModal}>Cerrar</button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
